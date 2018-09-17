@@ -7,15 +7,16 @@
 //
 
 import Foundation
+import UIKit
 
 struct SCEntity: Decodable {
     
     let success: Bool
     let status: Int
     let title: String
-    let achievements: [Achievement]
+    let rank: [Rank]
     
-    struct Achievement: Decodable {
+    struct Rank: Decodable {
         let id: Int
         let level: String
         let progress: Int
@@ -24,7 +25,7 @@ struct SCEntity: Decodable {
         let accessible: Bool
     }
     
-    private enum CodingKeys:CodingKey {
+    private enum CodingKeys: CodingKey {
         case success
         case status
         case overview
@@ -38,7 +39,7 @@ struct SCEntity: Decodable {
         status = try container.decode(Int.self, forKey: .status)
         let nestedContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .overview)
         title = try nestedContainer.decode(String.self, forKey: .title)
-        achievements = try container.decode([Achievement].self, forKey: .achievements)
+        rank = try container.decode([Rank].self, forKey: .achievements)
     }
     
 }

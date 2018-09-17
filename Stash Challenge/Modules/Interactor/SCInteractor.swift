@@ -8,9 +8,11 @@
 
 import Foundation
 
-class SCInteractor {
+class SCInteractor: PresentorToInterectorProtocol {
     
-    func fetchUserAchievements() {
+    var presenter: InterectorToPresenterProtocol?
+    
+    func fetchAchievements() {
         
         guard let filePath = Bundle.main.url(forResource: "achievements", withExtension: "json") else {
             print("File path cannot be found")
@@ -21,10 +23,12 @@ class SCInteractor {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let data = try Data(contentsOf: filePath, options: [])
             let json = try decoder.decode(SCEntity.self, from: data)
-            print(json)
+            //TODO: Add logic to download images using 'bgImageUrl' string.
+            presenter?.achievementsFetched(achievements: json)
         }
         catch {
             print("Something went wrong with fetching 'achievement.json'")
+            presenter?.achievementsFetchedFailed()
         }
     }
     

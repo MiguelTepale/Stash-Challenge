@@ -15,6 +15,9 @@
 		8C2DBA58214C262D00F502BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2DBA56214C262D00F502BC /* Main.storyboard */; };
 		8C2DBA5A214C262E00F502BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C2DBA59214C262E00F502BC /* Assets.xcassets */; };
 		8C2DBA5D214C262E00F502BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2DBA5B214C262E00F502BC /* LaunchScreen.storyboard */; };
+		8CD2DD21214DD399000099FC /* SCProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD2DD20214DD399000099FC /* SCProtocols.swift */; };
+		8CD2DD25214DD80A000099FC /* SCRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD2DD24214DD80A000099FC /* SCRouter.swift */; };
+		8CD2DD27214E2C40000099FC /* SCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD2DD26214E2C40000099FC /* SCPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		8C2DBA59214C262E00F502BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C2DBA5C214C262E00F502BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C2DBA5E214C262E00F502BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CD2DD20214DD399000099FC /* SCProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCProtocols.swift; sourceTree = "<group>"; };
+		8CD2DD24214DD80A000099FC /* SCRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCRouter.swift; sourceTree = "<group>"; };
+		8CD2DD26214E2C40000099FC /* SCPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,9 +52,9 @@
 			children = (
 				8C0CAF16214CD33200B635C8 /* View */,
 				8C0CAF15214CD32300B635C8 /* Presenter */,
-				8C0CAF14214CD31D00B635C8 /* Router */,
 				8C0CAF13214CD30700B635C8 /* Interactor */,
 				8C0CAF12214CD2C400B635C8 /* Entity */,
+				8C0CAF14214CD31D00B635C8 /* Router */,
 				8C0CAF11214CD29300B635C8 /* Protocols */,
 			);
 			path = Modules;
@@ -57,6 +63,7 @@
 		8C0CAF11214CD29300B635C8 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				8CD2DD20214DD399000099FC /* SCProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -80,6 +87,7 @@
 		8C0CAF14214CD31D00B635C8 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				8CD2DD24214DD80A000099FC /* SCRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -87,6 +95,7 @@
 		8C0CAF15214CD32300B635C8 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				8CD2DD26214E2C40000099FC /* SCPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -203,8 +212,11 @@
 			files = (
 				8C0CAF1A214CD70400B635C8 /* SCInteractor.swift in Sources */,
 				8C0CAF18214CD37C00B635C8 /* SCEntity.swift in Sources */,
+				8CD2DD25214DD80A000099FC /* SCRouter.swift in Sources */,
+				8CD2DD27214E2C40000099FC /* SCPresenter.swift in Sources */,
 				8C2DBA55214C262D00F502BC /* SCViewController.swift in Sources */,
 				8C2DBA53214C262D00F502BC /* AppDelegate.swift in Sources */,
+				8CD2DD21214DD399000099FC /* SCProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

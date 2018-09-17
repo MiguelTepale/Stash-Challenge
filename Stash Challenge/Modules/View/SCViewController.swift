@@ -10,9 +10,25 @@ import UIKit
 
 class SCViewController: UIViewController {
     
+    var presenter: ViewToPresenterProtocol?
+    
+    @IBOutlet weak var answersLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        presenter?.updateView()
     }
 
+}
+
+extension SCViewController: PresenterToViewProtocol {
+    
+    func displayAchievements(achievements: SCEntity) {
+        title = achievements.title
+    }
+    
+    func showError() {
+        print("Achievements cannot be displayed")
+    }
+    
 }
