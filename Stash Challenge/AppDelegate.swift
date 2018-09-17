@@ -16,10 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let SCViewController = SCRouter.createModule()
-        let SCNavigationController = UINavigationController(rootViewController: SCViewController)
+        let SCNavigationController = SCRouter.createModule()
         window?.rootViewController = SCNavigationController
-        
+        UIApplication.shared.statusBarStyle = .lightContent
+        // Delete 'View controller-based status bar appearance' in info.plist to revert back to black status bar
         return true
     }
 

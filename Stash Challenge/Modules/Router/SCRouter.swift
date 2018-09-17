@@ -11,19 +11,25 @@ import UIKit
 
 class SCRouter: PresenterToRouterProtocol {
     
-    class func createModule() -> UIViewController {
+    class func createModule() -> UINavigationController {
         
+        //TODO: Handle the optional 'view'
         let view = mainstoryboard.instantiateViewController(withIdentifier: "SCViewController") as? SCViewController
         let presenter: ViewToPresenterProtocol & InterectorToPresenterProtocol = SCPresenter()
         let interactor: PresentorToInterectorProtocol = SCInteractor()
         let router: PresenterToRouterProtocol = SCRouter()
+        
         view?.presenter = presenter
         presenter.view = view
         presenter.router = router
         presenter.interector = interactor
         interactor.presenter = presenter
         
-        return view!
+        let SCNavigationController = UINavigationController(rootViewController: view!)
+        SCNavigationController.navigationBar.barTintColor = UIColor(red: 105/255, green: 62/255, blue: 203/255, alpha: 1.0)
+        SCNavigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
+        
+        return SCNavigationController
         
     }
     

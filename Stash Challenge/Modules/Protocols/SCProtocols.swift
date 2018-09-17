@@ -32,5 +32,5 @@ protocol ViewToPresenterProtocol: class {
 }
 
 protocol PresenterToRouterProtocol: class {
-    static func createModule() -> UIViewController
+    static func createModule() -> UINavigationController
 }
