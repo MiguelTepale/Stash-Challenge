@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
 class SCInteractor: PresentorToInterectorProtocol {
-    
+
     var presenter: InterectorToPresenterProtocol?
     
     func fetchAchievements() {
@@ -19,17 +20,45 @@ class SCInteractor: PresentorToInterectorProtocol {
             return
         }
         do {
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
             let data = try Data(contentsOf: filePath, options: [])
-            let json = try decoder.decode(SCEntity.self, from: data)
-            //TODO: Add logic to download images using 'bgImageUrl' string.
-            presenter?.achievementsFetched(achievements: json)
+            let json = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+            guard let jsonDictionary = json as? [String:Any] else {return}
+            let entity = SCEntity(with: jsonDictionary)
+            fetchThumbNails(with: entity)
         }
         catch {
             print("Something went wrong with fetching 'achievement.json'")
-            presenter?.achievementsFetchedFailed()
+            presenter?.userAchievementsFetchedFailed()
         }
+    }
+    
+    func fetchThumbNails(with entity: SCEntity) {
+        
+        for achievement in entity.achievements {
+            let url = URL(string: achievement.bgImageUrl)
+            let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                guard let downloadedData = data, error == nil else { return }
+                DispatchQueue.main.async {
+                    achievement.image = UIImage(data: downloadedData)
+                    self.verifyDownloadedImages(with: entity)
+                }
+            }
+            task.resume()
+        }
+        
+    }
+    
+    func verifyDownloadedImages(with entity: SCEntity) {
+        if allImagesDownloaded(with: entity) {
+            DispatchQueue.main.async {
+                self.presenter?.userAchievementsFetched(achievements: entity)
+            }
+        }
+    }
+    
+    func allImagesDownloaded(with entity: SCEntity) -> Bool {
+        let pendingImages = entity.achievements.filter{$0.image == nil}
+        return (pendingImages.isEmpty ? true : false)
     }
     
 }

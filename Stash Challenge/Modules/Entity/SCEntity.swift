@@ -9,37 +9,58 @@
 import Foundation
 import UIKit
 
-struct SCEntity: Decodable {
+struct SCEntity  {
     
-    let success: Bool
-    let status: Int
-    let title: String
-    let rank: [Rank]
+    var success: Bool
+    var status: Int
+    var title: String
+    var achievements = [Achievement]()
     
-    struct Rank: Decodable {
+    class Achievement {
+        
         let id: Int
         let level: String
         let progress: Int
         let total: Int
         let bgImageUrl: String
-        let accessible: Bool
+        let isAccessible: Bool
+        var image: UIImage?
+        
+        init(with id:Int, level: String, progress: Int, total: Int, bgImageUrl: String, isAccessible: Bool) {
+            self.id = id
+            self.level = level
+            self.progress = progress
+            self.total = total
+            self.bgImageUrl = bgImageUrl
+            self.isAccessible = isAccessible
+        }
+        
     }
     
-    private enum CodingKeys: CodingKey {
-        case success
-        case status
-        case overview
-        case title
-        case achievements
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        success = try container.decode(Bool.self, forKey: .success)
-        status = try container.decode(Int.self, forKey: .status)
-        let nestedContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .overview)
-        title = try nestedContainer.decode(String.self, forKey: .title)
-        rank = try container.decode([Rank].self, forKey: .achievements)
+    init(with jsonDictionary: [String:Any]) {
+        
+        let success = jsonDictionary["success"] as? Bool ?? false
+        let status = jsonDictionary["status"] as? Int ?? 400
+        let overview = jsonDictionary["overview"] as? [String:Any] ?? [:]
+        let title = overview["title"] as? String ?? "Title not available"
+        let achievementsDictionary = jsonDictionary["achievements"] as? [[String:Any]] ??  [[:]]
+        
+        for achievement in achievementsDictionary {
+            
+            let id = achievement["id"] as? Int ?? -1
+            let level = achievement["level"] as? String ?? "?"
+            let progress = achievement["progress"] as? Int ?? 0
+            let total = achievement["total"] as? Int ?? 0
+            let bgImageUrl = achievement["bg_image_url"] as? String ?? "Insert 'question mark' image"
+            let accessible = achievement["accessible"] as? Bool ?? false
+            
+            let newAchievement = Achievement(with: id, level: level, progress: progress, total: total, bgImageUrl: bgImageUrl, isAccessible: accessible)
+            self.achievements.append(newAchievement)
+            
+        }
+        self.success = success
+        self.status = status
+        self.title = title
     }
     
 }

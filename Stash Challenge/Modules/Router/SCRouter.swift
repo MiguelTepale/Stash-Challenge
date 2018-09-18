@@ -26,7 +26,7 @@ class SCRouter: PresenterToRouterProtocol {
         interactor.presenter = presenter
         
         let SCNavigationController = UINavigationController(rootViewController: view!)
-        SCNavigationController.navigationBar.barTintColor = UIColor(red: 105/255, green: 62/255, blue: 203/255, alpha: 1.0)
+        SCNavigationController.navigationBar.barTintColor = UIColor(red: 105/255, green: 62/255, blue: 203/255, alpha: 0.0)
         SCNavigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         
         return SCNavigationController

@@ -22,11 +22,11 @@ class SCPresenter: ViewToPresenterProtocol {
 
 extension SCPresenter: InterectorToPresenterProtocol {
     
-    func achievementsFetched(achievements: SCEntity) {
-        view?.displayAchievements(achievements: achievements)
+    func userAchievementsFetched(achievements: SCEntity) {
+        view?.displayUserAchievements(user: achievements)
     }
     
-    func achievementsFetchedFailed() {
+    func userAchievementsFetchedFailed() {
         print("Fetching of achievements failed")
     }
     

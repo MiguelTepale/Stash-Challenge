@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 protocol PresenterToViewProtocol: class {
-    func displayAchievements(achievements: SCEntity)
-    func showError()
+    func displayUserAchievements(user: SCEntity)
+    func displayError()
 }
 
 protocol InterectorToPresenterProtocol: class {
-    func achievementsFetched(achievements: SCEntity)
-    func achievementsFetchedFailed()
+    func userAchievementsFetched(achievements: SCEntity)
+    func userAchievementsFetchedFailed()
 }
 
 protocol PresentorToInterectorProtocol: class {
